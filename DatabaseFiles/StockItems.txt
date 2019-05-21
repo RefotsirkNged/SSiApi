@@ -1,0 +1,19 @@
+-- Table: public."StockItems"
+
+-- DROP TABLE public."StockItems";
+
+CREATE TABLE public."StockItems"
+(
+    "Stock" integer NOT NULL,
+    "LocationId" integer,
+    "ArticleId" integer,
+    "StockItemId" bigint NOT NULL DEFAULT nextval('"StockItems_StockItemId_seq"'::regclass) ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    CONSTRAINT "StockItem_pkey" PRIMARY KEY ("StockItemId")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."StockItems"
+    OWNER to postgres;

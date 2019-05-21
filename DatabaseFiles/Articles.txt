@@ -1,0 +1,18 @@
+-- Table: public."Articles"
+
+-- DROP TABLE public."Articles";
+
+CREATE TABLE public."Articles"
+(
+    "ArticleId" bigint NOT NULL DEFAULT nextval('"Articles_ArticleId_seq"'::regclass) ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "Name" character varying COLLATE pg_catalog."default",
+    "StockItemId" integer NOT NULL,
+    CONSTRAINT "Articles_pkey" PRIMARY KEY ("ArticleId")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Articles"
+    OWNER to postgres;

@@ -1,0 +1,20 @@
+-- Table: public."Locations"
+
+-- DROP TABLE public."Locations";
+
+CREATE TABLE public."Locations"
+(
+    "StockItemId" integer NOT NULL,
+    "RowId" integer NOT NULL,
+    "ShelfId" integer NOT NULL,
+    "ShelfPartId" integer NOT NULL,
+    "LocationId" bigint NOT NULL DEFAULT nextval('"Locations_LocationId_seq"'::regclass) ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    CONSTRAINT "Location_pkey" PRIMARY KEY ("LocationId")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Locations"
+    OWNER to postgres;

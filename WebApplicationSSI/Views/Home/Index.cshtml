@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model LoginViewModel
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <div>
+
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username)
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.password)
+        @Html.TextBoxFor(m => m.password)
+        @Html.ValidationMessageFor(m => m.password)
+    </div>
+    <div>
+        @Html.DisplayTextFor(m => m.message)
+    </div>
+    <br />
+    <input type="submit" value="login" style="float: left;" id="btnSave" title="btn" name="ButtonType" />
+}

@@ -1,0 +1,214 @@
+﻿@model DataViewModel
+@using SSIApi.Entities
+
+@{
+    ViewData["Title"] = "Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="dataStylesheet" href="~/css/StyleSheet.css" />
+
+<h1 style="">Lagerstatus</h1>
+<h2>Brugere</h2>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <p>Users</p>
+            <table>
+                <tr>
+                    <td>Firstname</td>
+                    <td>Lastname</td>
+                    <td>Username</td>
+                    <td>UserId</td>
+                </tr>
+                @foreach (User user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Username</td>
+                        <td>@user.UserId</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-sm">
+            <p>Articles</p>
+            <table>
+                <tr>
+                    <td>Article Name</td>
+                    <td>ArticleId</td>
+                    <td>StockItemId</td>
+                </tr>
+                @foreach (Article article in Model.Articles)
+                {
+                    <tr>
+                        <td>@article.Name</td>
+                        <td>@article.ArticleId</td>
+                        <td>@article.StockItemId</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-sm">
+            <p>StockItems</p>
+            <table>
+                <tr>
+                    <td>StockItemId</td>
+                    <td>LocationId</td>
+                    <td>ArticleId</td>
+                    <td>Stock</td>
+                </tr>
+                @foreach (StockItem stockItem in Model.StockItems)
+                {
+                    <tr>
+                        <td>@stockItem.StockItemId</td>
+                        <td>@stockItem.LocationId</td>
+                        <td>@stockItem.ArticleId</td>
+                        <td>@stockItem.Stock</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-sm">
+            <p>Location</p>
+            <table>
+                <tr>
+                    <td>LocationId</td>
+                    <td>StockItemId</td>
+                    <td>RowId</td>
+                    <td>ShelfId</td>
+                    <td>ShelfPartId</td>
+                </tr>
+                @foreach (Location location in Model.Locations)
+                {
+                    <tr>
+                        <td>@location.LocationId</td>
+                        <td>@location.StockItemId</td>
+                        <td>@location.RowId</td>
+                        <td>@location.ShelfId</td>
+                        <td>@location.ShelfPartId</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-sm">
+            @*<button class="btn btn-info btn-lg" data-toggle="modal" data-target="#ArticleModal">Add Article</button>
+                <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#StockItemModal">Add StockItem</button>
+                <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#LocationModal">Add Location</button>
+                <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#UserModal">Add User</button>*@
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("SubmitArticle", "Data", FormMethod.Post))
+{
+    <div id="ArticleModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Article</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.TextBoxFor(m => m.newArticle.Name, new { @placeholder = "Article Name" })
+                    @Html.TextBoxFor(m => m.newArticle.StockItemId, new { @placeholder = "StockItem Id" })
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+            @Html.ActionLink("Submit",
+"SubmitArticle", "Data", null, null)
+            <!-- Modal content-->
+        </div>
+    </div>
+}
+
+<div id="ArticleModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Article</h4>
+            </div>
+            <div class="modal-body">
+                @Html.TextBoxFor(m => m.newArticle.Name, new { @placeholder = "Article Name" })
+                @Html.TextBoxFor(m => m.newArticle.StockItemId, new { @placeholder = "StockItem Id" })
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        @Html.ActionLink("Submit",
+"SubmitArticle", "Data", null, null)
+        <!-- Modal content-->
+    </div>
+</div>
+
+<div id="StockItemModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New StockItem</h4>
+            </div>
+            <div class="modal-body">
+                @Html.TextBoxFor(m => m.newStockItem.ArticleId, new { @placeholder = "Article Id" })
+                @Html.TextBoxFor(m => m.newStockItem.LocationId, new { @placeholder = "Location Id" })
+                @Html.TextBoxFor(m => m.newStockItem.Stock, new { @placeholder = "Stock" })
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Submit",
+                "SubmitStockItem", "Data", null, null)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="LocationModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Location</h4>
+            </div>
+            <div class="modal-body">
+                @Html.TextBoxFor(m => m.newLocation.StockItemId, new { @placeholder = "StockItemId" })
+                @Html.TextBoxFor(m => m.newLocation.RowId, new { @placeholder = "RowId" })
+                @Html.TextBoxFor(m => m.newLocation.ShelfId, new { @placeholder = "ShelfId" })
+                @Html.TextBoxFor(m => m.newLocation.ShelfPartId, new { @placeholder = "ShelfPartId" })
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Submit",
+                "SubmitLocation", "Data", null, null)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="UserModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New User</h4>
+            </div>
+            <div class="modal-body">
+                @Html.TextBoxFor(m => m.newUser.Username, new { @placeholder = "UserName" })
+                @Html.TextBoxFor(m => m.newUser.FirstName, new { @placeholder = "Firstname" })
+                @Html.TextBoxFor(m => m.newUser.LastName, new { @placeholder = "Lastname" })
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Submit",
+                "SubmitUser", "Data", null, null)
+            </div>
+        </div>
+    </div>
+</div>

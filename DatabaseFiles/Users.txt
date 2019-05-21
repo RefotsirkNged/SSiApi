@@ -1,0 +1,21 @@
+-- Table: public."Users"
+
+-- DROP TABLE public."Users";
+
+CREATE TABLE public."Users"
+(
+    "UserId" bigint NOT NULL DEFAULT nextval('"Users_UserId_seq"'::regclass) ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    "FirstName" character varying COLLATE pg_catalog."default",
+    "LastName" character varying COLLATE pg_catalog."default",
+    "Username" character varying COLLATE pg_catalog."default",
+    "PasswordHash" bytea,
+    "PasswordSalt" bytea,
+    CONSTRAINT "Users_pkey" PRIMARY KEY ("UserId")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."Users"
+    OWNER to postgres;
